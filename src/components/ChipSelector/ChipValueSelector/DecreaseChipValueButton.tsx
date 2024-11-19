@@ -8,15 +8,11 @@ const DecreaseChipValueButton = () => {
   const { chipValue } = useChipContext();
   const { isDisabled } = useDisableButton();
 
-  const animateOnDecrement = !isDisabled && minAmount !== chipValue;
-  const disabledDecrement = isDisabled || minAmount === chipValue;
+  const animate = !isDisabled && minAmount !== chipValue;
+  const disable = isDisabled || minAmount === chipValue;
 
   return (
-    <ChipValueButton
-      animateOnTap={animateOnDecrement}
-      disabled={disabledDecrement}
-      operator='-'
-    />
+    <ChipValueButton animateOnTap={animate} disabled={disable} operator='-' />
   );
 };
 

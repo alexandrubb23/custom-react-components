@@ -5,7 +5,7 @@ const useDisableButton = () => {
   const { chipValue } = useChipContext();
   const { isOpen } = useDrawerContext();
 
-  const isDisabled = (!isOpen && chipValue === 0) || chipValue === 0;
+  const isDisabled = (!isOpen && chipValue === 0) || isOpen;
 
   return { isDisabled };
 };

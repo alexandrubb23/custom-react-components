@@ -4,14 +4,15 @@ import { roundedButtonStyle } from './style.css';
 
 type ChipValueButtonProps = {
   operator: Operator;
+  className?: string;
 };
 
-const ChipValueButton = ({ operator }: ChipValueButtonProps) => {
+const ChipValueButton = ({ className, operator }: ChipValueButtonProps) => {
   const { onSelect, chipValue } = useChipContext();
 
   return (
     <CounterButton
-      className={roundedButtonStyle}
+      className={`${roundedButtonStyle} ${className}`}
       onClick={onSelect}
       operator={operator}
       value={chipValue}

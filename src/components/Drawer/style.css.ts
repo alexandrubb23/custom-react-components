@@ -2,7 +2,7 @@ import { style, keyframes } from '@vanilla-extract/css';
 
 const openDrawer = keyframes({
   '0%': {
-    height: 0,
+    height: '100%',
   },
   '25%': {
     opacity: 0.25,

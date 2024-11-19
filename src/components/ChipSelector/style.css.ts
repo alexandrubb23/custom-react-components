@@ -1,13 +1,19 @@
-import { createVar, globalStyle, keyframes, style } from '@vanilla-extract/css';
+import {
+  ComplexStyleRule,
+  createVar,
+  globalStyle,
+  keyframes,
+  style,
+} from '@vanilla-extract/css';
 
 export const squeeze = keyframes({
   '0%': {
-    padding: 0  
+    padding: 0,
   },
-  '100%' : {
-    padding: 5
-  }
-})
+  '100%': {
+    padding: 5,
+  },
+});
 
 const listContent = keyframes({
   '0%': {
@@ -23,7 +29,7 @@ export const chipDrawerStyle = style({
   selectors: {
     '&::before': {
       position: 'absolute',
-      content: "",
+      content: '',
       width: '100%',
       height: '100%',
       left: 0,
@@ -41,7 +47,7 @@ export const chipDrawerStyle = style({
     },
     '&::after': {
       position: 'absolute',
-      content: "",
+      content: '',
       width: '99%',
       height: '99%',
       left: 1,
@@ -59,14 +65,14 @@ export const chipDrawerStyle = style({
         0deg, 
         rgba(0, 0, 0, 0.2), 
         rgba(0, 0, 0, 0.2)
-      )`
-    }
+      )`,
+    },
   },
   backgroundBlendMode: 'overlay',
   borderRadius: 24,
 });
 
-export const chipValueAnimation = createVar()
+export const chipValueAnimation = createVar();
 
 export const chipValueStyle = style({
   animation: chipValueAnimation,
@@ -82,7 +88,7 @@ export const chipValueStyle = style({
       rgba(0, 0, 0, 0.2), 
       rgba(0, 0, 0, 0.2)
     )`,
-  borderRadius: '24px', /* Apply rounded corners to the parent */
+  borderRadius: '24px' /* Apply rounded corners to the parent */,
   bottom: 0,
   display: 'flex',
   justifyContent: 'space-between',
@@ -92,7 +98,7 @@ export const chipValueStyle = style({
 
 export const fakeBorderStyle = style({
   padding: 1,
-  borderRadius: '24px', /* Match the parent's border-radius */
+  borderRadius: '24px' /* Match the parent's border-radius */,
   backgroundImage: `linear-gradient(
     214.04deg,
     rgba(255, 229, 179, 0.7) -12.42%,
@@ -108,13 +114,48 @@ export const chipValueTransparent = style({
   background: 'transparent',
 });
 
+// START: Buttons
+const commonButtonStyle: ComplexStyleRule = {
+  backgroundColor: 'black',
+  boxShadow:
+    '0 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(136, 136, 136, 0.2)',
+  content: '',
+  left: '50%',
+  position: 'absolute',
+  top: '50%',
+  transform: 'translate(-50%, -50%)',
+};
+
 export const roundedButtonStyle = style({
   backgroundColor: '#beb3a5',
   borderRadius: '50%',
+  fontSize: 0,
   height: 40,
   margin: 0,
+  position: 'relative',
   width: 40,
+  selectors: {
+    '&::before': {
+      ...commonButtonStyle,
+      height: 1,
+      width: '0.875rem',
+    },
+  },
 });
+
+export const roundedPlusButtonStyle = style([
+  roundedButtonStyle,
+  {
+    selectors: {
+      '&::after': {
+        ...commonButtonStyle,
+        height: '0.875rem',
+        width: 1,
+      },
+    },
+  },
+]);
+// END: Buttons
 
 export const chipSelectedValueOutlined = style({
   alignItems: 'center',
@@ -125,15 +166,21 @@ export const chipSelectedValueOutlined = style({
   justifyContent: 'center',
 });
 
+export const chipsStyle = style({
+  animation: `${listContent} 1s ease-in-out forwards`,
+  zIndex: 99,
+  position: 'absolute',
+  bottom: 50,
+  width: '100%',
+});
+
 export const chipsListStyle = style({
-  animation: `${listContent} 0.3s ease-in-out forwards`,
   display: 'grid',
   gap: 5,
   gridTemplateColumns: '1fr 1fr',
   gridTemplateRows: 'auto repeat(3, 1fr)',
   listStyleType: 'none',
   margin: 0,
-  opacity: 0,
   padding: 5,
 });
 
@@ -145,6 +192,8 @@ export const chipsListItemStyle = style({
   padding: '8px 0',
   width: '100%',
   boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.3)',
+  textShadow:
+    '0 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(136, 136, 136, 0.2)',
 });
 
 globalStyle(`ul li:nth-child(1)`, {
@@ -152,22 +201,21 @@ globalStyle(`ul li:nth-child(1)`, {
 });
 
 globalStyle(`ul li:nth-child(1n)::after`, {
-  background: '#958B7D', 
+  background: '#958B7D',
   content: '',
   display: 'block',
-  gridColumn: 1 / -1, 
-  height: 1, 
+  gridColumn: 1 / -1,
+  height: 1,
   left: 0,
-  margin: '13px 7px 0', 
+  margin: '13px 7px 0',
   position: 'absolute',
   width: 'calc(100% - 13px)',
 });
 
 globalStyle(`ul li:nth-last-child(2)::after`, {
   display: 'none',
-})
+});
 
 globalStyle(`ul li:last-child::after`, {
   display: 'none',
-})
-
+});

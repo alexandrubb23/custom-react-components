@@ -1,6 +1,5 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-
 import Drawer from '../Drawer/Drawer';
 import ChipValueButton from './ChipValueButton';
 import useChipContext from './contexts/useChipContext';
@@ -10,12 +9,14 @@ import {
   chipValueStyle,
   chipValueTransparent,
   chipValueAnimation,
-  squeeze
+  squeeze,
+  roundedPlusButtonStyle,
 } from './style.css';
 
 const CURRENCY = '€';
 
-export const squeezeAnimation = (start: boolean, duration = 0.3) => start ? `${squeeze} ${duration}s forwards` : 'none'
+export const squeezeAnimation = (start: boolean, duration = 0.3) =>
+  start ? `${squeeze} ${duration}s forwards` : 'none';
 
 export const chipWithCurrency = (value: number) => `${CURRENCY}${value}`;
 
@@ -26,17 +27,17 @@ const ChipValue = () => {
   const transparent = isOpen ? chipValueTransparent : '';
 
   const style = assignInlineVars({
-    [chipValueAnimation]: squeezeAnimation(isOpen)
+    [chipValueAnimation]: squeezeAnimation(isOpen),
   });
 
   return (
-    <div className={`${chipValueStyle} ${transparent}`} style={style}> 
+    <div className={`${chipValueStyle} ${transparent}`} style={style}>
       <ChipValueButton operator='-' />
       <Drawer.Toggle className={chipSelectedValueOutlined}>
         <div>BET</div>
         <div>{chipWithCurrency(chipValue)}</div>
       </Drawer.Toggle>
-      <ChipValueButton operator='+' />
+      <ChipValueButton operator='+' className={roundedPlusButtonStyle} />
     </div>
   );
 };

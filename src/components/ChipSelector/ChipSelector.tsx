@@ -12,14 +12,14 @@ const ChipSelector = () => {
   const { onSelect } = useChipContext();
 
   return (
-    <>
+    <div className='chip-drawer'>
       <Drawer.Content className={chipDrawerStyle}>
         {isOpen && <ChipsList onSelect={onSelect} />}
       </Drawer.Content>
       <motion.div animate='animation'>
         <ChipValue />
       </motion.div>
-    </>
+    </div>
   );
 };
 

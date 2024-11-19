@@ -1,16 +1,8 @@
-import { memo, useMemo } from 'react';
-import { ChipContextType } from './contexts/ChipContext';
-import { chipWithCurrency } from './ChipValueSelector';
-import {
-  chipsListItemStyle,
-  chipsListStyle,
-  chipsStyle,
-  chipsTitleStyle,
-} from './style.css';
 import { motion, Variants } from 'framer-motion';
-import useChips from './hooks/useChips';
 
-type ChipsListProps = Pick<ChipContextType, 'onSelect'>;
+import { chipDrawerStyle, chipsStyle, chipsTitleStyle } from './style.css';
+import ChipsList, { childrenVariant } from './ChipsList';
+import Drawer from '../Drawer/Drawer';
 
 const parentVariant: Variants = {
   initial: { opacity: 0 },
@@ -20,38 +12,22 @@ const parentVariant: Variants = {
   },
 };
 
-const childrenVariant: Variants = {
-  initial: { opacity: 0, x: 10 },
-  animate: { opacity: 1, x: 0 },
-};
-
-const ChipAmountSelector = ({ onSelect }: ChipsListProps) => {
-  const { chips } = useChips();
-
+const ChipAmountSelector = () => {
   return (
-    <motion.div
-      className={chipsStyle}
-      initial='initial'
-      animate='animate'
-      variants={parentVariant}
-    >
-      <motion.h2 className={chipsTitleStyle} variants={childrenVariant}>
-        Select Amount
-      </motion.h2>
-      <ul className={chipsListStyle}>
-        {chips.map(chip => (
-          <motion.li
-            className={`child ${chipsListItemStyle}`}
-            key={chip}
-            onClick={() => onSelect(chip)}
-            variants={childrenVariant}
-          >
-            {chipWithCurrency(chip)}
-          </motion.li>
-        ))}
-      </ul>
-    </motion.div>
+    <Drawer.Content className={chipDrawerStyle}>
+      <motion.div
+        className={chipsStyle}
+        initial='initial'
+        animate='animate'
+        variants={parentVariant}
+      >
+        <motion.h2 className={chipsTitleStyle} variants={childrenVariant}>
+          Select Amount
+        </motion.h2>
+        <ChipsList />
+      </motion.div>
+    </Drawer.Content>
   );
 };
 
-export default memo(ChipAmountSelector);
+export default ChipAmountSelector;

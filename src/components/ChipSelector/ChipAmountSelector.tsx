@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { ChipContextType } from './contexts/ChipContext';
-import { chipWithCurrency } from './ChipValue';
+import { chipWithCurrency } from './ChipValueSelector';
 import { chipsListItemStyle, chipsListStyle, chipsStyle } from './style.css';
 import { motion, Variants } from 'framer-motion';
 
@@ -8,18 +8,9 @@ type ChipsListProps = Pick<ChipContextType, 'onSelect'>;
 
 const parentVariant: Variants = {
   initial: { opacity: 0 },
-  /**
-   * Here we are defining @param staggerChildren with 1sec.
-   * You can change this time as per your need.
-   * 1st child will not get delayed. delay starts from 2nd child onwards.
-   * 2nd child animation will start after: 1sec
-   * 2rd child animation will start after: 2sec
-   * 4th child animation will start after: 3sec
-   * and so on...
-   */
   animate: {
     opacity: 1,
-    transition: { staggerChildren: 0.1, staggerDirection: -1 },
+    transition: { staggerChildren: 0.07, staggerDirection: -1 },
   },
 };
 
@@ -28,12 +19,19 @@ const childrenVariant: Variants = {
   animate: { opacity: 1, x: 0 },
 };
 
-const ChipsList = ({ onSelect }: ChipsListProps) => {
+const ChipAmountSelector = ({ onSelect }: ChipsListProps) => {
   const chips = [500, 100, 250, 10, 50, 1, 5];
 
   return (
-    <div className={chipsStyle}>
-      <h2
+    <motion.div
+      className={chipsStyle}
+      initial='initial'
+      animate='animate'
+      variants={parentVariant}
+    >
+      <motion.h2
+        className='child'
+        variants={childrenVariant}
         style={{
           color: '#FFF5E7',
           fontSize: '0.688rem',
@@ -41,13 +39,8 @@ const ChipsList = ({ onSelect }: ChipsListProps) => {
         }}
       >
         Select Amount
-      </h2>
-      <motion.ul
-        className={chipsListStyle}
-        initial='initial'
-        animate='animate'
-        variants={parentVariant}
-      >
+      </motion.h2>
+      <ul className={chipsListStyle}>
         {chips.map(chip => (
           <motion.li
             className={`child ${chipsListItemStyle}`}
@@ -58,9 +51,9 @@ const ChipsList = ({ onSelect }: ChipsListProps) => {
             {chipWithCurrency(chip)}
           </motion.li>
         ))}
-      </motion.ul>
-    </div>
+      </ul>
+    </motion.div>
   );
 };
 
-export default memo(ChipsList);
+export default memo(ChipAmountSelector);

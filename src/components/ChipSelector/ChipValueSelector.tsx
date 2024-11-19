@@ -1,7 +1,7 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
 import Drawer from '../Drawer/Drawer';
-import ChipValueButton from './ChipValueButton';
+import ChipValueButton from './ChipValueButton/ChipValueButton';
 import useChipContext from './contexts/useChipContext';
 import useDrawerContext from '../Drawer/contexts/useDrawerContext';
 import {
@@ -10,8 +10,8 @@ import {
   chipValueTransparent,
   chipValueAnimation,
   squeeze,
-  roundedPlusButtonStyle,
 } from './style.css';
+import { roundedPlusButtonStyle } from './ChipValueButton/style.css';
 
 const CURRENCY = '€';
 
@@ -20,7 +20,7 @@ export const squeezeAnimation = (start: boolean, duration = 0.3) =>
 
 export const chipWithCurrency = (value: number) => `${CURRENCY}${value}`;
 
-const ChipValue = () => {
+const ChipValueSelector = () => {
   const { isOpen } = useDrawerContext();
   const { chipValue } = useChipContext();
 
@@ -42,4 +42,4 @@ const ChipValue = () => {
   );
 };
 
-export default ChipValue;
+export default ChipValueSelector;

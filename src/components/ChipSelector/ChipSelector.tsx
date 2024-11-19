@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 
 import useDrawerContext from '../Drawer/contexts/useDrawerContext';
 import Drawer from '../Drawer/Drawer';
-import ChipsList from './ChipsList';
-import ChipValue from './ChipValue';
+import ChipAmountSelector from './ChipAmountSelector';
+import ChipValueSelector from './ChipValueSelector';
 import useChipContext from './contexts/useChipContext';
 import { chipDrawerStyle } from './style.css';
 
@@ -14,10 +14,10 @@ const ChipSelector = () => {
   return (
     <div className='chip-drawer'>
       <Drawer.Content className={chipDrawerStyle}>
-        {isOpen && <ChipsList onSelect={onSelect} />}
+        {isOpen && <ChipAmountSelector onSelect={onSelect} />}
       </Drawer.Content>
       <motion.div animate='animation'>
-        <ChipValue />
+        <ChipValueSelector />
       </motion.div>
     </div>
   );

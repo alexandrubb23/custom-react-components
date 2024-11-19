@@ -5,7 +5,7 @@ import Drawer from '../Drawer/Drawer';
 import ChipSelector from './ChipSelector';
 import ChipContextProvider from './providers/ChipContextProvider';
 
-const ChipSelectorDrawer = () => {
+const ChipDrawerSelector = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   // Simulate bet opening
@@ -29,4 +29,4 @@ const ChipSelectorDrawer = () => {
   );
 };
 
-export default ChipSelectorDrawer;
+export default ChipDrawerSelector;

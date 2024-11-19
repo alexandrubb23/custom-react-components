@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
+import { PropsWithClassName } from '../../types/generics';
 
 export type Operator = '+' | '-';
 
-type CounterButtonProps = {
+type CounterButtonProps = PropsWithClassName<{
   onClick: (newValue: number) => void;
   operator: Operator;
   value: number;
-  className?: string;
-};
+}>;
 
 const CounterButton = ({
   className,

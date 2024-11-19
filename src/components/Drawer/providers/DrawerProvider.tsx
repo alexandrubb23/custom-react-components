@@ -20,7 +20,6 @@ export type DrawerProps = PropsWithChildren<{
 const AUTO_OPEN_DELAY = 300;
 
 const DrawerProvider = ({ hideOn, children, open = false }: DrawerProps) => {
-  console.log('Is Drawer open?', open);
   useElementWasClicked(() => setIsOpen(false));
 
   const [isOpen, setIsOpen] = useState(open);

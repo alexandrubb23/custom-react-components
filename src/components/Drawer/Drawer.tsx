@@ -1,12 +1,10 @@
-import { PropsWithChildren } from 'react';
-
+import { PropsWithClassNameAndChildren } from '../../types/generics';
 import useDrawerContext from './contexts/useDrawerContext';
 import DrawerProvider, { type DrawerProps } from './providers/DrawerProvider';
 import { drawerContentStyle, openDrawerStyle } from './style.css';
 
-type ToggleProps = PropsWithChildren<{
+type ToggleProps = PropsWithClassNameAndChildren<{
   as?: keyof JSX.IntrinsicElements;
-  className?: string;
 }>;
 
 const Drawer = ({ hideOn, children, open }: DrawerProps) => (
@@ -15,12 +13,7 @@ const Drawer = ({ hideOn, children, open }: DrawerProps) => (
   </DrawerProvider>
 );
 
-const Content = ({
-  children,
-  className,
-}: PropsWithChildren<{
-  className?: string;
-}>) => {
+const Content = ({ children, className }: PropsWithClassNameAndChildren) => {
   const { isOpen } = useDrawerContext();
 
   const activeClass = isOpen ? openDrawerStyle : '';

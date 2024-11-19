@@ -146,6 +146,21 @@ export const chipsListItemStyle = style({
     '0 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(136, 136, 136, 0.2)',
 });
 
+export const selectedChipValueStyle = style({
+  display: 'flex',
+  gap: 3,
+  flexDirection: 'column',
+  textShadow: '0px 2px 2px rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) 0px 1px 5px',
+});
+
+export const betTextStyle = style({
+  color: '#CCC2B3',
+  fontSize: 10,
+  lineHeight: 1,
+});
+
+export const betValueStyle = style({ lineHeight: 1, fontSize: '1rem' });
+
 globalStyle(`ul li:nth-child(1)`, {
   gridColumn: '1 / -1',
 });

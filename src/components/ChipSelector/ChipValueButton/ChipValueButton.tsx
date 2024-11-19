@@ -14,7 +14,7 @@ type ChipValueButtonProps = PropsWithClassName<{
 
 const ChipValueButton = ({
   animateOnTap,
-  className,
+  className = '',
   operator,
   disabled,
 }: ChipValueButtonProps) => {
@@ -23,13 +23,12 @@ const ChipValueButton = ({
   const Box = animateOnTap ? ScaleOnTap : Fragment;
   let buttonClass = roundedButtonStyle;
 
-  if (className) buttonClass += ` ${className}`;
   if (disabled) buttonClass += ` ${roundedButtonDisabledStyle}`;
 
   return (
     <Box>
       <CounterButton
-        className={buttonClass}
+        className={`${buttonClass} ${className}`}
         disabled={disabled}
         onClick={onSelect}
         operator={operator}

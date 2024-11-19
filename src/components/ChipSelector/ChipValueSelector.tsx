@@ -7,10 +7,13 @@ import ScaleOnTap from './ChipValueButton/ScaleOnTap';
 import useChipContext from './contexts/useChipContext';
 import useDrawerContext from '../Drawer/contexts/useDrawerContext';
 import {
+  betTextStyle,
+  betValueStyle,
   chipSelectedValueOutlined,
   chipValueAnimation,
   chipValueStyle,
   chipValueTransparent,
+  selectedChipValueStyle,
   squeeze,
 } from './style.css';
 import useChips from './hooks/useChips';
@@ -49,8 +52,10 @@ const ChipValueSelector = () => {
 
       <Drawer.Toggle className={chipSelectedValueOutlined}>
         <ScaleOnTap>
-          <div>BET</div>
-          <div>{chipWithCurrency(chipValue)}</div>
+          <div className={selectedChipValueStyle}>
+            <div className={betTextStyle}>BET</div>
+            <div className={betValueStyle}>{chipWithCurrency(chipValue)}</div>
+          </div>
         </ScaleOnTap>
       </Drawer.Toggle>
 

@@ -1,3 +1,5 @@
+import { useTimeout } from 'usehooks-ts';
+
 import {
   PropsWithChildren,
   useCallback,
@@ -7,7 +9,6 @@ import {
 } from 'react';
 import useElementWasClicked from '../../../hooks/useElementWasClicked';
 import DrawerContext from '../contexts/DrawerContext';
-import { useTimeout } from 'usehooks-ts';
 import { drawerStyle } from '../style.css';
 
 export type HideOn = boolean | number | string;

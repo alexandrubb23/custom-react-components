@@ -13,7 +13,10 @@ const Drawer = ({ hideOn, children, open }: DrawerProps) => (
   </DrawerProvider>
 );
 
-const Content = ({ children, className }: PropsWithClassNameAndChildren) => {
+const Content = ({
+  children,
+  className = '',
+}: PropsWithClassNameAndChildren) => {
   const { isOpen } = useDrawerContext();
 
   const activeClass = isOpen ? openDrawerStyle : '';

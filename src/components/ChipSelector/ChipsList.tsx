@@ -1,14 +1,10 @@
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-import { chipsListItemStyle, chipsListStyle } from './style.css';
+import { chipWithCurrency } from './ChipValueSelector';
 import useChipContext from './contexts/useChipContext';
 import useChips from './hooks/useChips';
-import { chipWithCurrency } from './ChipValueSelector';
-
-export const childrenVariant: Variants = {
-  initial: { opacity: 0, x: 10 },
-  animate: { opacity: 1, x: 0 },
-};
+import { chipsListItemStyle, chipsListStyle } from './style.css';
+import { childrenVariant } from '../Drawer/Drawer';
 
 const ChipsList = () => {
   const { chips } = useChips();

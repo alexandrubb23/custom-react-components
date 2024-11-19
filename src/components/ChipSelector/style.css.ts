@@ -5,21 +5,21 @@ export const squeeze = keyframes({
     padding: 0,
   },
   '100%': {
-    padding: 5,
+    padding: '0 5px',
   },
 });
 
-export const chipDrawerStyle = style({
-  bottom: 0,
+export const borderedContainerStyle = style({
   selectors: {
     '&::before': {
       position: 'absolute',
       content: '',
       width: '100%',
       height: '100%',
-      left: 0,
-      top: 0,
+      left: -1,
+      top: -1,
       borderRadius: 'inherit',
+      padding: 1,
       backgroundImage: `linear-gradient(
         214.04deg,
         rgba(255, 229, 179, 0.7) -12.42%,
@@ -33,10 +33,10 @@ export const chipDrawerStyle = style({
     '&::after': {
       position: 'absolute',
       content: '',
-      width: '99%',
-      height: '99%',
-      left: 1,
-      top: 1,
+      width: '100%',
+      height: '100%',
+      left: 0,
+      top: 0,
       borderRadius: 'inherit',
       margin: 'auto',
       background: `
@@ -53,31 +53,25 @@ export const chipDrawerStyle = style({
       )`,
     },
   },
-  backgroundBlendMode: 'overlay',
-  borderRadius: 24,
 });
+
+export const chipDrawerStyle = style([
+  borderedContainerStyle,
+  {
+    bottom: 0,
+    backgroundBlendMode: 'overlay',
+    borderRadius: 24,
+  },
+]);
 
 export const chipValueAnimation = createVar();
 
 export const chipValueStyle = style({
   animation: chipValueAnimation,
-  background: `
-    linear-gradient(
-      122.88deg, 
-      #3e3220 -16.28%, 
-      #9c8d76 46.33%, 
-      #3f2d11 103.12%
-    ), 
-    linear-gradient(
-      0deg, 
-      rgba(0, 0, 0, 0.2), 
-      rgba(0, 0, 0, 0.2)
-    )`,
   borderRadius: '24px' /* Apply rounded corners to the parent */,
   bottom: 0,
   display: 'flex',
   justifyContent: 'space-between',
-  // padding: paddingVar,
   position: 'relative',
 });
 
@@ -93,10 +87,6 @@ export const fakeBorderStyle = style({
     rgba(137, 97, 80, 0.813607) 69.6%,
     rgba(222, 162, 107, 0.7) 80.24%
   )`,
-});
-
-export const chipValueTransparent = style({
-  background: 'transparent',
 });
 
 export const chipSelectedValueOutlined = style({

@@ -1,5 +1,4 @@
 import { useTimeout } from 'usehooks-ts';
-
 import {
   PropsWithChildren,
   useCallback,
@@ -7,6 +6,7 @@ import {
   useMemo,
   useState,
 } from 'react';
+
 import useElementWasClicked from '../../../hooks/useElementWasClicked';
 import DrawerContext from '../contexts/DrawerContext';
 import { drawerStyle } from '../style.css';
@@ -24,6 +24,7 @@ const DrawerProvider = ({ hideOn, children, open = false }: DrawerProps) => {
   useElementWasClicked(() => setIsOpen(false));
 
   const [isOpen, setIsOpen] = useState(open);
+  const [isOpening, setIsOpening] = useState(false);
 
   useTimeout(
     () => {
@@ -38,12 +39,19 @@ const DrawerProvider = ({ hideOn, children, open = false }: DrawerProps) => {
 
   const handleToggleClick = useCallback(() => {
     setIsOpen(prev => !prev);
+    setIsOpening(true);
+  }, []);
+
+  const handleIsOpened = useCallback(() => {
+    setIsOpening(false);
   }, []);
 
   const value = useMemo(
     () => ({
       handleToggleClick,
       isOpen,
+      isOpening,
+      handleIsOpened,
     }),
     [handleToggleClick, isOpen]
   );

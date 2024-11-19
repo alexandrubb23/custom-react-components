@@ -8,6 +8,7 @@ import {
   chipsTitleStyle,
 } from './style.css';
 import { motion, Variants } from 'framer-motion';
+import useChips from './hooks/useChips';
 
 type ChipsListProps = Pick<ChipContextType, 'onSelect'>;
 
@@ -22,18 +23,6 @@ const parentVariant: Variants = {
 const childrenVariant: Variants = {
   initial: { opacity: 0, x: 10 },
   animate: { opacity: 1, x: 0 },
-};
-
-export const useChips = () => {
-  // TODO: Fetch chips from API using a selector
-  const chips = [500, 100, 250, 10, 50, 1, 5];
-
-  const minAmount = useMemo(() => Math.min(...chips), [chips]);
-
-  // TODO: The max amount is not used in the current implementation but will be used in the future
-  const maxAmount = useMemo(() => Math.max(...chips), [chips]);
-
-  return { chips, maxAmount, minAmount };
 };
 
 const ChipAmountSelector = ({ onSelect }: ChipsListProps) => {

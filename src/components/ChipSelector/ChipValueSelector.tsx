@@ -13,7 +13,7 @@ import {
   chipValueTransparent,
   squeeze,
 } from './style.css';
-import { useChips } from './ChipAmountSelector';
+import useChips from './hooks/useChips';
 
 const CURRENCY = '€';
 

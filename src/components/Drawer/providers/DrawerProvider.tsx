@@ -34,7 +34,7 @@ const DrawerProvider = ({ hideOn, children, open = false }: DrawerProps) => {
   );
 
   useEffect(() => {
-    if (isOpen) setIsOpen(false);
+    if (isOpen && !open) setIsOpen(false);
   }, [hideOn, open]);
 
   const handleToggleClick = useCallback(() => {

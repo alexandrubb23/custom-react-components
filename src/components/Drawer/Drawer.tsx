@@ -72,6 +72,9 @@ const Toggle = ({
   const { handleToggleClick, isOpening } = useDrawerContext();
 
   const openDrawer = () => {
+    // Do not allow the drawer to open if it is already opening
+    // This will prevent the drawer from opening multiple times
+    // And have the sensation of never opening the drawer :)
     if (isOpening) return;
     handleToggleClick();
   };

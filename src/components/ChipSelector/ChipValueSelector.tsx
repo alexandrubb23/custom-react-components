@@ -13,6 +13,7 @@ import {
   chipValueTransparent,
   squeeze,
 } from './style.css';
+import { useChips } from './ChipAmountSelector';
 
 const CURRENCY = '€';
 
@@ -22,6 +23,8 @@ export const squeezeAnimation = (start: boolean, duration = 0.3) =>
 export const chipWithCurrency = (value: number) => `${CURRENCY}${value}`;
 
 const ChipValueSelector = () => {
+  const { minAmount } = useChips();
+
   const { isOpen } = useDrawerContext();
   const { chipValue } = useChipContext();
 
@@ -31,18 +34,30 @@ const ChipValueSelector = () => {
     [chipValueAnimation]: squeezeAnimation(isOpen),
   });
 
+  const disabledButton = (!isOpen && chipValue === 0) || chipValue === 0;
+
+  const animateOnDecrement = !disabledButton && minAmount !== chipValue;
+  const disabledDecrement = disabledButton || minAmount === chipValue;
+
   return (
     <div className={`${chipValueStyle} ${transparent}`} style={style}>
-      <ChipValueButton animateOnTap={chipValue !== 0} operator='-' />
+      <ChipValueButton
+        animateOnTap={animateOnDecrement}
+        disabled={disabledDecrement}
+        operator='-'
+      />
+
       <Drawer.Toggle className={chipSelectedValueOutlined}>
         <ScaleOnTap>
           <div>BET</div>
           <div>{chipWithCurrency(chipValue)}</div>
         </ScaleOnTap>
       </Drawer.Toggle>
+
       <ChipValueButton
-        animateOnTap={true}
+        animateOnTap={!disabledButton}
         className={roundedPlusButtonStyle}
+        disabled={disabledButton}
         operator='+'
       />
     </div>

@@ -12,7 +12,7 @@ const commonButtonStyle: ComplexStyleRule = {
 };
 
 export const roundedButtonStyle = style({
-  backgroundColor: '#beb3a5',
+  backgroundColor: '#FFF5E7',
   borderRadius: '50%',
   fontSize: 0,
   height: 40,
@@ -38,5 +38,13 @@ export const roundedPlusButtonStyle = style([
         width: 1,
       },
     },
+  },
+]);
+
+export const roundedButtonDisabledStyle = style([
+  roundedButtonStyle,
+  {
+    backgroundColor: '#beb3a5',
+    cursor: 'not-allowed',
   },
 ]);

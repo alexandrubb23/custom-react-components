@@ -1,10 +1,4 @@
-import {
-  ComplexStyleRule,
-  createVar,
-  globalStyle,
-  keyframes,
-  style,
-} from '@vanilla-extract/css';
+import { createVar, globalStyle, keyframes, style } from '@vanilla-extract/css';
 
 export const squeeze = keyframes({
   '0%': {
@@ -14,15 +8,6 @@ export const squeeze = keyframes({
     padding: 5,
   },
 });
-
-// const fadeIn = keyframes({
-//   '0%': {
-//     opacity: 0,
-//   },
-//   '100%': {
-//     opacity: 1,
-//   },
-// });
 
 export const chipDrawerStyle = style({
   bottom: 0,
@@ -124,11 +109,17 @@ export const chipSelectedValueOutlined = style({
 });
 
 export const chipsStyle = style({
-  // animation: `${fadeIn} 1s ease-in-out forwards`,
   zIndex: 99,
   position: 'absolute',
   bottom: 50,
   width: '100%',
+});
+
+export const chipsTitleStyle = style({
+  color: '#FFF5E7',
+  fontSize: '0.688rem',
+  fontWeight: 400,
+  margin: 0,
 });
 
 export const chipsListStyle = style({
@@ -145,6 +136,8 @@ export const chipsListItemStyle = style({
   backgroundColor: 'beige',
   borderRadius: 20,
   cursor: 'pointer',
+  fontSize: '0.938rem',
+  lineHeight: 0.91,
   margin: '3px 0',
   padding: '8px 0',
   width: '100%',

@@ -1,7 +1,12 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import { ChipContextType } from './contexts/ChipContext';
 import { chipWithCurrency } from './ChipValueSelector';
-import { chipsListItemStyle, chipsListStyle, chipsStyle } from './style.css';
+import {
+  chipsListItemStyle,
+  chipsListStyle,
+  chipsStyle,
+  chipsTitleStyle,
+} from './style.css';
 import { motion, Variants } from 'framer-motion';
 
 type ChipsListProps = Pick<ChipContextType, 'onSelect'>;
@@ -19,8 +24,20 @@ const childrenVariant: Variants = {
   animate: { opacity: 1, x: 0 },
 };
 
-const ChipAmountSelector = ({ onSelect }: ChipsListProps) => {
+export const useChips = () => {
+  // TODO: Fetch chips from API using a selector
   const chips = [500, 100, 250, 10, 50, 1, 5];
+
+  const minAmount = useMemo(() => Math.min(...chips), [chips]);
+
+  // TODO: The max amount is not used in the current implementation but will be used in the future
+  const maxAmount = useMemo(() => Math.max(...chips), [chips]);
+
+  return { chips, maxAmount, minAmount };
+};
+
+const ChipAmountSelector = ({ onSelect }: ChipsListProps) => {
+  const { chips } = useChips();
 
   return (
     <motion.div
@@ -29,15 +46,7 @@ const ChipAmountSelector = ({ onSelect }: ChipsListProps) => {
       animate='animate'
       variants={parentVariant}
     >
-      <motion.h2
-        className='child'
-        variants={childrenVariant}
-        style={{
-          color: '#FFF5E7',
-          fontSize: '0.688rem',
-          fontWeight: 400,
-        }}
-      >
+      <motion.h2 className={chipsTitleStyle} variants={childrenVariant}>
         Select Amount
       </motion.h2>
       <ul className={chipsListStyle}>

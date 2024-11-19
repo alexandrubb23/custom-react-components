@@ -5,9 +5,5 @@ export type PropsWithClassName<P = unknown> = P & {
 };
 
 export type PropsWithClassNameAndChildren<P = unknown> = PropsWithChildren<
-  PropsWithClassName<
-    P & {
-      className?: string | undefined;
-    }
-  >
+  PropsWithClassName<P>
 >;

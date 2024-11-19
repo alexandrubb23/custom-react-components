@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { chipWithCurrency } from './ChipValueSelector';
+import { chipWithCurrency } from './ChipValueSelector/ChipValueSelector';
 import useChipContext from './contexts/useChipContext';
 import useChips from './hooks/useChips';
 import { chipsListItemStyle, chipsListStyle } from './style.css';

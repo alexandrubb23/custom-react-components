@@ -20,7 +20,7 @@ export const parentVariant = ({
   animateHeight = 240,
   bottom = -5,
   initialHeight = '100%',
-  staggeredDuration = 0.05,
+  staggeredDuration = 0.03,
 }: ConfigValue = {}): Variants => ({
   initial: { opacity: 0, height: initialHeight },
   animate: {
@@ -29,7 +29,7 @@ export const parentVariant = ({
     opacity: 1,
     transition: {
       staggerChildren: staggeredDuration,
-      staggerDirection: -1,
+      staggerDirection: 1,
     },
   },
 });

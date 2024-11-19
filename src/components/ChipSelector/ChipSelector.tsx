@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 
 import ChipAmountSelector from './ChipAmountSelector';
-import ChipValueSelector from './ChipValueSelector';
+import ChipValueSelector from './ChipValueSelector/ChipValueSelector';
 import useDrawerContext from '../Drawer/contexts/useDrawerContext';
 
 const ChipSelector = () => {

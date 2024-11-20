@@ -23,6 +23,11 @@ export const chipValueSelectorContainerStyle = style({
   gap: 3,
   flexDirection: 'column',
   textShadow: '0px 2px 2px rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.5) 0px 1px 5px',
+  WebkitUserSelect: 'none',
+  MozUserSelect: 'none',
+  msUserSelect: 'none',
+  userSelect: 'none',
+  WebkitTapHighlightColor: 'rgba(0,0,0,0)',
 });
 
 export const chipValueSelectorTextStyle = style({

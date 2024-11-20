@@ -10,13 +10,17 @@ type ChipValueButtonProps = PropsWithClassName<{
   animateOnTap?: boolean;
   operator: Operator;
   disabled?: boolean;
+  min?: number;
+  max?: number;
 }>;
 
 const ChipValueButton = ({
   animateOnTap,
   className = '',
-  operator,
   disabled,
+  max,
+  min,
+  operator,
 }: ChipValueButtonProps) => {
   const { onChipSelect, chipValue } = useChipContext();
 
@@ -33,6 +37,8 @@ const ChipValueButton = ({
         onClick={onChipSelect}
         operator={operator}
         value={chipValue}
+        min={min}
+        max={max}
       />
     </Box>
   );

@@ -12,7 +12,12 @@ const DecreaseChipValueButton = () => {
   const disable = isDisabled || minAmount === chipValue;
 
   return (
-    <ChipValueButton animateOnTap={animate} disabled={disable} operator='-' />
+    <ChipValueButton
+      animateOnTap={animate}
+      disabled={disable}
+      min={minAmount}
+      operator='-'
+    />
   );
 };
 

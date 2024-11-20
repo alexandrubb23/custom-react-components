@@ -1,10 +1,10 @@
-import { motion, useTime, Variants } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
+import { PropsWithChildren, useRef, useState } from 'react';
+import { useOnClickOutside, useTimeout } from 'usehooks-ts';
 import { PropsWithClassNameAndChildren } from '../../types/generics';
 import useDrawerContext from './contexts/useDrawerContext';
 import DrawerProvider, { type DrawerProps } from './providers/DrawerProvider';
 import { drawerContentStyle } from './style.css';
-import { useOnClickOutside, useTimeout } from 'usehooks-ts';
-import { Fragment, PropsWithChildren, useRef, useState } from 'react';
 
 type ToggleProps = PropsWithClassNameAndChildren<{
   as?: keyof JSX.IntrinsicElements;

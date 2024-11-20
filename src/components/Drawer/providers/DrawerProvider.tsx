@@ -11,36 +11,21 @@ export type DrawerProps = PropsWithChildren<{
 
 const DrawerProvider = ({ children }: DrawerProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpening, setIsOpening] = useState(false);
 
-  const openDrawer = useCallback(() => {
-    setIsOpen(true);
-    setIsOpening(true);
-  }, []);
-
-  const closeDrawer = useCallback(() => {
-    setIsOpen(false);
-    setIsOpening(false);
-  }, []);
-
-  const handleOpeningStart = useCallback(() => {
-    setIsOpening(true);
-  }, []);
-
-  const handleOpeningComplete = useCallback(() => {
-    setIsOpening(false);
-  }, []);
+  const setDrawerState = useCallback(
+    (isOpen: boolean) => () => {
+      setIsOpen(isOpen);
+    },
+    []
+  );
 
   const value = useMemo(
     (): DrawerContextType => ({
-      closeDrawer,
-      handleOpeningComplete,
-      handleOpeningStart,
       isOpen,
-      isOpening,
-      openDrawer,
+      openDrawer: setDrawerState(true),
+      closeDrawer: setDrawerState(false),
     }),
-    [isOpen, isOpening]
+    [isOpen]
   );
 
   return (

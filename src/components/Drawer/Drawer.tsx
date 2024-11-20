@@ -4,7 +4,7 @@ import useDrawerContext from './contexts/useDrawerContext';
 import DrawerProvider, { type DrawerProps } from './providers/DrawerProvider';
 import { drawerContentStyle } from './style.css';
 import { useOnClickOutside, useTimeout } from 'usehooks-ts';
-import { Fragment, PropsWithChildren, useRef } from 'react';
+import { Fragment, PropsWithChildren, useRef, useState } from 'react';
 
 type ToggleProps = PropsWithClassNameAndChildren<{
   as?: keyof JSX.IntrinsicElements;
@@ -55,34 +55,39 @@ const DrawerChildren = ({
 }: PropsWithChildren<{
   autoOpenDelay?: number;
 }>) => {
-  const { closeDrawer, openDrawer, isOpening } = useDrawerContext();
-
-  const ref = useRef(null);
-  useOnClickOutside(ref, () => {
-    if (isOpening) return;
-    closeDrawer();
-  });
+  const { openDrawer } = useDrawerContext();
 
   const delay = autoOpenDelay ? autoOpenDelay * 1000 : null;
   useTimeout(openDrawer, delay);
 
-  return <div ref={ref}>{children}</div>;
+  return <>{children}</>;
 };
 
 const Content = ({
   children,
   className = '',
 }: PropsWithClassNameAndChildren) => {
-  const { handleOpeningStart, handleOpeningComplete } = useDrawerContext();
+  const ref = useRef(null);
+  const { closeDrawer } = useDrawerContext();
+  const [canBeClosed, setCanBeClosed] = useState(false);
+
+  useOnClickOutside(ref, () => {
+    if (!canBeClosed) return;
+    closeDrawer();
+  });
+
+  const handleAnimationComplete = () => {
+    setCanBeClosed(true);
+  };
 
   return (
     <motion.div
       animate='animate'
       className={`${drawerContentStyle} ${className}`}
       initial='initial'
-      onAnimationComplete={handleOpeningComplete}
-      onAnimationStart={handleOpeningStart}
       variants={parentVariant()}
+      onAnimationComplete={handleAnimationComplete}
+      ref={ref}
     >
       {children}
     </motion.div>

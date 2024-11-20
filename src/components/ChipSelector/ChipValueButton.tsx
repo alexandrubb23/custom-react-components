@@ -1,20 +1,25 @@
-import CounterButton, { Operator } from '../CounterButton/CounterButton';
+import { PropsWithClassName } from '../../types/generics';
+import CounterButton, {
+  CounterOperation,
+} from '../CounterButton/CounterButton';
 import { roundedButtonStyle } from './ChipValueButton/style.css';
 import useChipContext from './contexts/useChipContext';
 
-type ChipValueButtonProps = {
-  operator: Operator;
-  className?: string;
-};
+type ChipValueButtonProps = PropsWithClassName<{
+  operation: CounterOperation;
+}>;
 
-const ChipValueButton = ({ className, operator }: ChipValueButtonProps) => {
+const ChipValueButton = ({
+  className = '',
+  operation,
+}: ChipValueButtonProps) => {
   const { onChipSelect, chipValue } = useChipContext();
 
   return (
     <CounterButton
       className={`${roundedButtonStyle} ${className}`}
       onClick={onChipSelect}
-      operator={operator}
+      operation={operation}
       value={chipValue}
     />
   );

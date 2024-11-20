@@ -1,15 +1,17 @@
 import { useCallback, useEffect, useRef } from 'react';
-import { PropsWithClassName } from '../../types/generics';
 import { useEventListener } from 'usehooks-ts';
 
-export type Operator = '+' | '-';
+import { PropsWithClassName } from '../../types/generics';
+
+export type CounterOperation = 'increment' | 'decrement';
 
 export type CounterButtonProps = PropsWithClassName<{
   disabled?: boolean;
+  label?: string;
   max?: number;
   min?: number;
   onClick: (newValue: number) => void;
-  operator: Operator;
+  operation: CounterOperation;
   value: number;
 }>;
 
@@ -23,8 +25,9 @@ const CounterButton = ({
   max = Infinity,
   min = -Infinity,
   onClick,
-  operator,
+  operation,
   value,
+  label,
 }: CounterButtonProps) => {
   const valueRef = useRef(value);
   const isMouseDown = useRef(false);
@@ -48,12 +51,13 @@ const CounterButton = ({
 
     const currentValue = valueRef.current;
 
-    if (operator === '-' && currentValue === 0) {
+    const isDecrement = operation === 'decrement';
+    if (isDecrement && currentValue === 0) {
       clearCounter();
       return;
     }
 
-    const newValue = operator === '-' ? currentValue - 1 : currentValue + 1;
+    const newValue = isDecrement ? currentValue - 1 : currentValue + 1;
 
     onClick(newValue);
 
@@ -72,7 +76,7 @@ const CounterButton = ({
     intervalRef.current = setInterval(handleCount, durationRef.current);
 
     console.log('Duration: ', durationRef.current);
-  }, [disabled, onClick, operator, clearCounter, min, max]);
+  }, [disabled, onClick, operation, clearCounter, min, max]);
 
   const onMouseDown = () => {
     isMouseDown.current = true;
@@ -87,7 +91,7 @@ const CounterButton = ({
 
   return (
     <button className={className} onClick={handleCount} ref={buttonRef}>
-      {operator}
+      {label}
     </button>
   );
 };

@@ -2,7 +2,7 @@ import ChipValueButton from '../ChipValueButton/ChipValueButton';
 import { roundedPlusButtonStyle } from '../ChipValueButton/style.css';
 import useDisableButton from '../hooks/useDisableButton';
 
-const IncreaseChipValueButton = () => {
+const IncrementChipValueButton = () => {
   const { isDisabled } = useDisableButton();
 
   return (
@@ -10,9 +10,9 @@ const IncreaseChipValueButton = () => {
       animateOnTap={!isDisabled}
       className={roundedPlusButtonStyle}
       disabled={isDisabled}
-      operator='+'
+      operation='increment'
     />
   );
 };
 
-export default IncreaseChipValueButton;
+export default IncrementChipValueButton;

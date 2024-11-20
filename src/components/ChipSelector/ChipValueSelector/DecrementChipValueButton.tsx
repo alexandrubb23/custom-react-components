@@ -3,7 +3,7 @@ import useChipContext from '../contexts/useChipContext';
 import useChips from '../hooks/useChips';
 import useDisableButton from '../hooks/useDisableButton';
 
-const DecreaseChipValueButton = () => {
+const DecrementChipValueButton = () => {
   const { minAmount } = useChips();
   const { chipValue } = useChipContext();
   const { isDisabled } = useDisableButton();
@@ -16,9 +16,9 @@ const DecreaseChipValueButton = () => {
       animateOnTap={animate}
       disabled={disable}
       min={minAmount}
-      operator='-'
+      operation='decrement'
     />
   );
 };
 
-export default DecreaseChipValueButton;
+export default DecrementChipValueButton;

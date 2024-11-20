@@ -1,14 +1,16 @@
 import { Fragment } from 'react/jsx-runtime';
 
 import { PropsWithClassName } from '../../../types/generics';
-import CounterButton, { Operator } from '../../CounterButton/CounterButton';
+import CounterButton, {
+  CounterOperation,
+} from '../../CounterButton/CounterButton';
 import useChipContext from '../contexts/useChipContext';
 import ScaleOnTap from './ScaleOnTap';
 import { roundedButtonDisabledStyle, roundedButtonStyle } from './style.css';
 
 type ChipValueButtonProps = PropsWithClassName<{
   animateOnTap?: boolean;
-  operator: Operator;
+  operation: CounterOperation;
   disabled?: boolean;
   min?: number;
   max?: number;
@@ -20,7 +22,7 @@ const ChipValueButton = ({
   disabled,
   max,
   min,
-  operator,
+  operation,
 }: ChipValueButtonProps) => {
   const { onChipSelect, chipValue } = useChipContext();
 
@@ -34,11 +36,11 @@ const ChipValueButton = ({
       <CounterButton
         className={`${buttonClass} ${className}`}
         disabled={disabled}
-        onClick={onChipSelect}
-        operator={operator}
-        value={chipValue}
-        min={min}
         max={max}
+        min={min}
+        onClick={onChipSelect}
+        operation={operation}
+        value={chipValue}
       />
     </Box>
   );

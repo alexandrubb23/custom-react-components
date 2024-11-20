@@ -8,8 +8,8 @@ import {
   squeeze,
 } from '../style.css';
 import ChipValue from './ChipValue';
-import DecreaseChipValueButton from './DecreaseChipValueButton';
-import IncreaseChipValueButton from './IncreaseChipValueButton';
+import DecrementChipValueButton from './DecrementChipValueButton';
+import IncrementChipValueButton from './IncrementChipValueButton';
 import { chipValueSelectorContainer } from './style.css';
 
 const CURRENCY = '€';
@@ -33,9 +33,9 @@ const ChipValueSelector = () => {
   return (
     <div className={className} style={style}>
       <div className={chipValueSelectorContainer}>
-        <DecreaseChipValueButton />
+        <DecrementChipValueButton />
         <ChipValue />
-        <IncreaseChipValueButton />
+        <IncrementChipValueButton />
       </div>
     </div>
   );

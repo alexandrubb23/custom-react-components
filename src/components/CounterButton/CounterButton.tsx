@@ -74,8 +74,6 @@ const CounterButton = ({
 
     if (intervalRef.current) clearInterval(intervalRef.current);
     intervalRef.current = setInterval(handleCount, durationRef.current);
-
-    console.log('Duration: ', durationRef.current);
   }, [disabled, onClick, operation, clearCounter, min, max]);
 
   const onMouseDown = () => {
@@ -86,9 +84,8 @@ const CounterButton = ({
 
   // TODO: Attach event listeners to handle touches interactions?
   // And check if we already have this implemented
-  useEventListener('mousedown', onMouseDown, buttonRef);
-  useEventListener('mouseup', clearCounter, buttonRef);
-  useEventListener('mouseleave', clearCounter, buttonRef);
+  // I don't like this solution, but it's the best I could come up with
+  // TODO: Revisit this implementation
   useEventListener(
     'touchstart',
     event => {
@@ -98,6 +95,25 @@ const CounterButton = ({
     buttonRef
   );
   useEventListener('touchend', clearCounter, buttonRef);
+
+  useEventListener('mousedown', onMouseDown, buttonRef);
+  useEventListener('mouseup', clearCounter, buttonRef);
+  useEventListener('mouseleave', clearCounter, buttonRef);
+
+  // TODO: Revisit this implementation
+  useEventListener(
+    'pointerdown',
+    event => {
+      switch (event.pointerType) {
+        case 'touch':
+          handleCount();
+          break;
+        default:
+          break;
+      }
+    },
+    buttonRef
+  );
 
   return (
     <button className={className} onClick={handleCount} ref={buttonRef}>

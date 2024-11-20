@@ -85,9 +85,19 @@ const CounterButton = ({
   };
 
   // TODO: Attach event listeners to handle touches interactions?
+  // And check if we already have this implemented
   useEventListener('mousedown', onMouseDown, buttonRef);
   useEventListener('mouseup', clearCounter, buttonRef);
   useEventListener('mouseleave', clearCounter, buttonRef);
+  useEventListener(
+    'touchstart',
+    event => {
+      event.preventDefault();
+      onMouseDown();
+    },
+    buttonRef
+  );
+  useEventListener('touchend', clearCounter, buttonRef);
 
   return (
     <button className={className} onClick={handleCount} ref={buttonRef}>

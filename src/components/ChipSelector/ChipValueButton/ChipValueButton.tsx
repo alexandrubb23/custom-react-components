@@ -18,7 +18,7 @@ const ChipValueButton = ({
   operator,
   disabled,
 }: ChipValueButtonProps) => {
-  const { onSelect, chipValue } = useChipContext();
+  const { onChipSelect, chipValue } = useChipContext();
 
   const Box = animateOnTap ? ScaleOnTap : Fragment;
   let buttonClass = roundedButtonStyle;
@@ -30,7 +30,7 @@ const ChipValueButton = ({
       <CounterButton
         className={`${buttonClass} ${className}`}
         disabled={disabled}
-        onClick={onSelect}
+        onClick={onChipSelect}
         operator={operator}
         value={chipValue}
       />

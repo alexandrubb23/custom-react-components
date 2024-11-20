@@ -4,12 +4,12 @@ export type SelectChip = (value: number) => void;
 
 export type ChipContextType = {
   chipValue: number;
-  onSelect: SelectChip;
+  onChipSelect: SelectChip;
 };
 
 const ChipContext = createContext<ChipContextType>({
   chipValue: 0,
-  onSelect: () => {},
+  onChipSelect: () => {},
 });
 
 export default ChipContext;

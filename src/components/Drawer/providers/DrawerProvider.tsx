@@ -1,59 +1,46 @@
-import { useTimeout } from 'usehooks-ts';
-import {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
+import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 
-import useElementWasClicked from '../../../hooks/useElementWasClicked';
-import DrawerContext from '../contexts/DrawerContext';
+import DrawerContext, { DrawerContextType } from '../contexts/DrawerContext';
 import { drawerStyle } from '../style.css';
 
 export type HideOn = boolean | number | string;
 
 export type DrawerProps = PropsWithChildren<{
-  hideOn?: HideOn;
-  open?: boolean;
+  autoOpenDelay?: number;
 }>;
 
-const AUTO_OPEN_DELAY = 300;
-
-const DrawerProvider = ({ hideOn, children, open = false }: DrawerProps) => {
-  useElementWasClicked(() => setIsOpen(false));
-
-  const [isOpen, setIsOpen] = useState(open);
+const DrawerProvider = ({ children }: DrawerProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const [isOpening, setIsOpening] = useState(false);
 
-  useTimeout(
-    () => {
-      setIsOpen(open);
-    },
-    open ? AUTO_OPEN_DELAY : null
-  );
-
-  useEffect(() => {
-    if (isOpen && !open) setIsOpen(false);
-  }, [hideOn, open]);
-
-  const handleToggleClick = useCallback(() => {
-    setIsOpen(prev => !prev);
+  const openDrawer = useCallback(() => {
+    setIsOpen(true);
     setIsOpening(true);
   }, []);
 
-  const handleIsOpened = useCallback(() => {
+  const closeDrawer = useCallback(() => {
+    setIsOpen(false);
+    setIsOpening(false);
+  }, []);
+
+  const handleOpeningStart = useCallback(() => {
+    setIsOpening(true);
+  }, []);
+
+  const handleOpeningComplete = useCallback(() => {
     setIsOpening(false);
   }, []);
 
   const value = useMemo(
-    () => ({
-      handleToggleClick,
+    (): DrawerContextType => ({
+      closeDrawer,
+      handleOpeningComplete,
+      handleOpeningStart,
       isOpen,
       isOpening,
-      handleIsOpened,
+      openDrawer,
     }),
-    [handleToggleClick, isOpen]
+    [isOpen, isOpening]
   );
 
   return (

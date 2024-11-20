@@ -1,8 +1,10 @@
-import { motion, Variants } from 'framer-motion';
+import { motion, useTime, Variants } from 'framer-motion';
 import { PropsWithClassNameAndChildren } from '../../types/generics';
 import useDrawerContext from './contexts/useDrawerContext';
 import DrawerProvider, { type DrawerProps } from './providers/DrawerProvider';
 import { drawerContentStyle } from './style.css';
+import { useOnClickOutside, useTimeout } from 'usehooks-ts';
+import { Fragment, PropsWithChildren, useRef } from 'react';
 
 type ToggleProps = PropsWithClassNameAndChildren<{
   as?: keyof JSX.IntrinsicElements;
@@ -39,24 +41,47 @@ export const childrenVariant: Variants = {
   animate: { opacity: 1, x: 0 },
 };
 
-const Drawer = ({ hideOn, children, open }: DrawerProps) => (
-  <DrawerProvider hideOn={hideOn} open={open}>
-    {children}
-  </DrawerProvider>
-);
+const Drawer = ({ autoOpenDelay, children }: DrawerProps) => {
+  return (
+    <DrawerProvider>
+      <DrawerChildren autoOpenDelay={autoOpenDelay}>{children}</DrawerChildren>
+    </DrawerProvider>
+  );
+};
+
+const DrawerChildren = ({
+  children,
+  autoOpenDelay,
+}: PropsWithChildren<{
+  autoOpenDelay?: number;
+}>) => {
+  const { closeDrawer, openDrawer, isOpening } = useDrawerContext();
+
+  const ref = useRef(null);
+  useOnClickOutside(ref, () => {
+    if (isOpening) return;
+    closeDrawer();
+  });
+
+  const delay = autoOpenDelay ? autoOpenDelay * 1000 : null;
+  useTimeout(openDrawer, delay);
+
+  return <div ref={ref}>{children}</div>;
+};
 
 const Content = ({
   children,
   className = '',
 }: PropsWithClassNameAndChildren) => {
-  const { handleIsOpened } = useDrawerContext();
+  const { handleOpeningStart, handleOpeningComplete } = useDrawerContext();
 
   return (
     <motion.div
       animate='animate'
       className={`${drawerContentStyle} ${className}`}
       initial='initial'
-      onAnimationComplete={handleIsOpened}
+      onAnimationComplete={handleOpeningComplete}
+      onAnimationStart={handleOpeningStart}
       variants={parentVariant()}
     >
       {children}
@@ -69,15 +94,7 @@ const Toggle = ({
   children,
   className,
 }: ToggleProps) => {
-  const { handleToggleClick, isOpening } = useDrawerContext();
-
-  const openDrawer = () => {
-    // Do not allow the drawer to open if it is already opening
-    // This will prevent the drawer from opening multiple times
-    // And have the sensation of never opening the drawer :)
-    if (isOpening) return;
-    handleToggleClick();
-  };
+  const { openDrawer } = useDrawerContext();
 
   return (
     <Component className={className} onClick={openDrawer}>

@@ -14,9 +14,9 @@ import {
 
 const ChipValue = () => {
   const { chipValue } = useChipContext();
-  const { isOpening } = useDrawerContext();
+  const { isOpen } = useDrawerContext();
 
-  const AnimateBetOnTap = !isOpening ? ScaleOnTap : Fragment;
+  const AnimateBetOnTap = !isOpen ? ScaleOnTap : Fragment;
 
   return (
     <Drawer.Toggle className={chipValueSelectorToggle}>

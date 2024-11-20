@@ -8,12 +8,12 @@ const ChipSelector = () => {
   const { isOpen } = useDrawerContext();
 
   return (
-    <div className='chip-drawer'>
+    <>
       {isOpen && <ChipAmountSelector />}
       <motion.div animate='animation'>
         <ChipValueSelector />
       </motion.div>
-    </div>
+    </>
   );
 };
 

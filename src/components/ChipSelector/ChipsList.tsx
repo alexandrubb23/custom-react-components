@@ -5,10 +5,17 @@ import useChipContext from './contexts/useChipContext';
 import useChips from './hooks/useChips';
 import { chipsListItemStyle, chipsListStyle } from './style.css';
 import { childrenVariant } from '../Drawer/Drawer';
+import useDrawerContext from '../Drawer/contexts/useDrawerContext';
 
 const ChipsList = () => {
   const { chips } = useChips();
-  const { onSelect } = useChipContext();
+  const { onChipSelect } = useChipContext();
+  const { closeDrawer } = useDrawerContext();
+
+  const handleChipSelect = (chip: number) => () => {
+    onChipSelect(chip);
+    closeDrawer();
+  };
 
   return (
     <ul className={chipsListStyle}>
@@ -16,7 +23,7 @@ const ChipsList = () => {
         <motion.li
           className={chipsListItemStyle}
           key={chip}
-          onClick={() => onSelect(chip)}
+          onClick={handleChipSelect(chip)}
           variants={childrenVariant}
         >
           {chipWithCurrency(chip)}

@@ -1,24 +1,19 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import ChipContext, { ChipContextType } from '../contexts/ChipContext';
+import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
+import ChipContext from '../contexts/ChipContext';
 
-type ChipContextProviderProps = {
-  renderDrawer: (value: ChipContextType) => React.ReactNode;
-};
-
-const ChipContextProvider = ({ renderDrawer }: ChipContextProviderProps) => {
+const ChipContextProvider = ({ children }: PropsWithChildren) => {
   const [chipValue, setChipValue] = useState(0);
 
-  const onSelect = useCallback((value: number) => {
+  const onChipSelect = useCallback((value: number) => {
     setChipValue(value);
   }, []);
 
-  const value = useMemo(() => ({ chipValue, onSelect }), [chipValue, onSelect]);
-
-  return (
-    <ChipContext.Provider value={value}>
-      {renderDrawer(value)}
-    </ChipContext.Provider>
+  const value = useMemo(
+    () => ({ chipValue, onChipSelect }),
+    [chipValue, onChipSelect]
   );
+
+  return <ChipContext.Provider value={value}>{children}</ChipContext.Provider>;
 };
 
 export default ChipContextProvider;

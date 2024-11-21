@@ -3,8 +3,6 @@ import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import DrawerContext, { DrawerContextType } from '../contexts/DrawerContext';
 import { drawerStyle } from '../style.css';
 
-export type HideOn = boolean | number | string;
-
 export type DrawerProps = PropsWithChildren<{
   autoOpenDelay?: number;
 }>;

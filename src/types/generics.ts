@@ -7,3 +7,5 @@ export type PropsWithClassName<P = unknown> = P & {
 export type PropsWithClassNameAndChildren<P = unknown> = PropsWithChildren<
   PropsWithClassName<P>
 >;
+
+export type StringOrNumber = Exclude<PropertyKey, symbol>;

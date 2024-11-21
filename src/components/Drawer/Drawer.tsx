@@ -4,7 +4,10 @@ import { useOnClickOutside, useTimeout } from 'usehooks-ts';
 
 import { drawerContentStyle } from './style.css';
 import DrawerProvider, { type DrawerProps } from './providers/DrawerProvider';
-import type { PropsWithClassNameAndChildren } from '@marbleTypes/generics';
+import type {
+  StringOrNumber,
+  PropsWithClassNameAndChildren,
+} from '@marbleTypes/generics';
 import useDrawerContext from './contexts/useDrawerContext';
 
 type ToggleProps = PropsWithClassNameAndChildren<{
@@ -12,9 +15,9 @@ type ToggleProps = PropsWithClassNameAndChildren<{
 }>;
 
 type ConfigValue = {
-  initialHeight?: string | number;
   animateHeight?: number;
-  bottom?: string | number;
+  bottom?: StringOrNumber;
+  initialHeight?: StringOrNumber;
   staggeredDuration?: number;
 };
 

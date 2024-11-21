@@ -40,7 +40,7 @@ const usePressAndHoldCounter = (
   const clearCounter = useCallback(() => {
     clearIntervalIfActive();
     isMouseDown.current = false;
-    durationRef.current = MAX_DURATION_MS;
+    durationRef.current = maxDuration;
   }, [maxDuration]);
 
   const startCounter = useCallback(() => {

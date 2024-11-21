@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useEventListener } from 'usehooks-ts';
 
-type Props = {
+type Config = {
   minDuration?: number;
   maxDuration?: number;
   decreaseStep?: number;
@@ -17,19 +17,28 @@ const usePressAndHoldCounter = (
     minDuration = MIN_DURATION_MS,
     maxDuration = MAX_DURATION_MS,
     decreaseStep = DECREASE_STEP_DURATION_MS,
-  }: Props = {}
+  }: Config = {}
 ) => {
   const isMouseDown = useRef(false);
-  const durationRef = useRef(MAX_DURATION_MS);
+  const durationRef = useRef(maxDuration);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  const clearCounter = useCallback(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      intervalRef.current = null;
+  useEffect(() => {
+    if (minDuration > maxDuration) {
+      console.warn('minDuration cannot be greater than maxDuration');
     }
+  }, [minDuration, maxDuration]);
 
+  const clearIntervalIfActive = () => {
+    if (!intervalRef.current) return;
+
+    clearInterval(intervalRef.current);
+    intervalRef.current = null;
+  };
+
+  const clearCounter = useCallback(() => {
+    clearIntervalIfActive();
     isMouseDown.current = false;
     durationRef.current = MAX_DURATION_MS;
   }, [maxDuration]);
@@ -44,7 +53,7 @@ const usePressAndHoldCounter = (
       if (durationRef.current > minDuration)
         durationRef.current -= decreaseStep;
 
-      if (intervalRef.current) clearInterval(intervalRef.current);
+      clearIntervalIfActive();
       intervalRef.current = setInterval(run, durationRef.current);
     };
 
@@ -76,4 +85,5 @@ const usePressAndHoldCounter = (
 
   return { buttonRef };
 };
+
 export default usePressAndHoldCounter;

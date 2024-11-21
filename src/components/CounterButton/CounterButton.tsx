@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-import { PropsWithClassName } from '../../types/generics';
+import { PropsWithClassName } from '@marbleTypes/generics';
 import usePressAndHoldCounter from './usePressAndHoldCounter';
 
 export type CounterOperation = 'increment' | 'decrement';

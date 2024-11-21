@@ -1,4 +1,4 @@
-import Drawer from '../Drawer/Drawer';
+import Drawer from '@components/Drawer/Drawer';
 import ChipSelector from './ChipSelector';
 import ChipContextProvider from './providers/ChipContextProvider';
 

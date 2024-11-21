@@ -2,7 +2,10 @@ import { motion } from 'framer-motion';
 
 import { chipDrawerStyle, chipsStyle, chipsTitleStyle } from './style.css';
 import ChipsList from './ChipsList';
-import Drawer, { childrenVariant, parentVariant } from '../Drawer/Drawer';
+import Drawer, {
+  childrenVariant,
+  parentVariant,
+} from '@components/Drawer/Drawer';
 
 const ChipAmountSelector = () => (
   <Drawer.Content className={chipDrawerStyle}>

@@ -1,4 +1,4 @@
-import useDrawerContext from '../../Drawer/contexts/useDrawerContext';
+import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
 import useChipContext from '../contexts/useChipContext';
 
 const useDisableButton = () => {

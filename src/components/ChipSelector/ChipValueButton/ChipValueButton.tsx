@@ -1,12 +1,12 @@
 import { Fragment } from 'react/jsx-runtime';
 
-import { PropsWithClassName } from '../../../types/generics';
+import { type PropsWithClassName } from '@marbleTypes/generics';
 import CounterButton, {
-  CounterOperation,
-} from '../../CounterButton/CounterButton';
-import useChipContext from '../contexts/useChipContext';
-import ScaleOnTap from './ScaleOnTap';
+  type CounterOperation,
+} from '@components/CounterButton/CounterButton';
 import { roundedButtonDisabledStyle, roundedButtonStyle } from './style.css';
+import ScaleOnTap from './ScaleOnTap';
+import useChipContext from '../contexts/useChipContext';
 
 type ChipValueButtonProps = PropsWithClassName<{
   animateOnTap?: boolean;

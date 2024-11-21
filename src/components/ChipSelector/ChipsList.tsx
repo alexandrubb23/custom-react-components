@@ -4,8 +4,8 @@ import { chipWithCurrency } from './ChipValueSelector/ChipValueSelector';
 import useChipContext from './contexts/useChipContext';
 import useChips from './hooks/useChips';
 import { chipsListItemStyle, chipsListStyle } from './style.css';
-import { childrenVariant } from '../Drawer/Drawer';
-import useDrawerContext from '../Drawer/contexts/useDrawerContext';
+import { childrenVariant } from '@components/Drawer/Drawer';
+import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
 
 const ChipsList = () => {
   const { chips } = useChips();

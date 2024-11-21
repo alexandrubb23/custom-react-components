@@ -1,16 +1,16 @@
 import { assignInlineVars } from '@vanilla-extract/dynamic';
 
-import useDrawerContext from '../../Drawer/contexts/useDrawerContext';
+import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
 import {
   borderedContainerStyle,
   chipValueAnimation,
   chipValueStyle,
   squeeze,
 } from '../style.css';
+import { chipValueSelectorContainer } from './style.css';
 import ChipValue from './ChipValue';
 import DecrementChipValueButton from './DecrementChipValueButton';
 import IncrementChipValueButton from './IncrementChipValueButton';
-import { chipValueSelectorContainer } from './style.css';
 
 const CURRENCY = '€';
 

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 
 import ChipAmountSelector from './ChipAmountSelector';
 import ChipValueSelector from './ChipValueSelector/ChipValueSelector';
-import useDrawerContext from '../Drawer/contexts/useDrawerContext';
+import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
 
 const ChipSelector = () => {
   const { isOpen } = useDrawerContext();

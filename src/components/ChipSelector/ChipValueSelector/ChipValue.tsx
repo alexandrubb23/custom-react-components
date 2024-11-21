@@ -1,15 +1,15 @@
 import { Fragment } from 'react';
 
-import useDrawerContext from '../../Drawer/contexts/useDrawerContext';
-import Drawer from '../../Drawer/Drawer';
+import { chipWithCurrency } from './ChipValueSelector';
+import Drawer from '@components/Drawer/Drawer';
 import ScaleOnTap from '../ChipValueButton/ScaleOnTap';
 import useChipContext from '../contexts/useChipContext';
-import { chipWithCurrency } from './ChipValueSelector';
+import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
 import {
   chipValueSelectorContainerStyle,
+  chipValueSelectorStyle,
   chipValueSelectorTextStyle,
   chipValueSelectorToggle,
-  chipValueSelectorStyle,
 } from './style.css';
 
 const ChipValue = () => {

@@ -1,6 +1,6 @@
 import ChipValueButton from '../ChipValueButton/ChipValueButton';
 import { roundedPlusButtonStyle } from '../ChipValueButton/style.css';
-import useDisableButton from '../hooks/useDisableButton';
+import useDisableButton from './useDisableButton';
 
 const IncrementChipValueButton = () => {
   const { isDisabled } = useDisableButton();

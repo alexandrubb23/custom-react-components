@@ -9,7 +9,7 @@ type Config = {
 
 const MIN_DURATION_MS = 50;
 const MAX_DURATION_MS = 200;
-const DECREASE_STEP_DURATION_MS = 5;
+const DECREASE_STEP_DURATION_MS = 10;
 
 const usePressAndHoldCounter = (
   handleCount: () => void,

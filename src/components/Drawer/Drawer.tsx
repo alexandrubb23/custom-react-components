@@ -1,6 +1,6 @@
 import { motion, Variants } from 'framer-motion';
 import { PropsWithChildren, useRef, useState } from 'react';
-import { useOnClickOutside, useTimeout } from 'usehooks-ts';
+import { useEventListener, useOnClickOutside, useTimeout } from 'usehooks-ts';
 
 import { drawerContentStyle } from './style.css';
 import DrawerProvider, { type DrawerProps } from './providers/DrawerProvider';
@@ -59,39 +59,37 @@ const DrawerChildren = ({
 }: PropsWithChildren<{
   autoOpenDelay?: number;
 }>) => {
-  const { openDrawer } = useDrawerContext();
-
-  const delay = autoOpenDelay ? autoOpenDelay * 1000 : null;
-  useTimeout(openDrawer, delay);
-
-  return <>{children}</>;
-};
-
-const Content = ({
-  children,
-  className = '',
-}: PropsWithClassNameAndChildren) => {
   const ref = useRef(null);
-  const { closeDrawer } = useDrawerContext();
   const [canBeClosed, setCanBeClosed] = useState(false);
+  const { closeDrawer, openDrawer } = useDrawerContext();
 
   useOnClickOutside(ref, () => {
     if (!canBeClosed) return;
     closeDrawer();
   });
 
-  const handleAnimationComplete = () => {
+  const handleCanBeClosed = () => {
     setCanBeClosed(true);
   };
 
+  const delay = autoOpenDelay ? autoOpenDelay * 1000 : null;
+  useTimeout(openDrawer, delay);
+
+  useEventListener('animationend', handleCanBeClosed, ref);
+
+  return <div ref={ref}>{children}</div>;
+};
+
+const Content = ({
+  children,
+  className = '',
+}: PropsWithClassNameAndChildren) => {
   return (
     <motion.div
       animate='animate'
       className={`${drawerContentStyle} ${className}`}
       initial='initial'
       variants={parentVariant()}
-      onAnimationComplete={handleAnimationComplete}
-      ref={ref}
     >
       {children}
     </motion.div>

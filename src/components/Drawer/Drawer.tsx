@@ -1,5 +1,5 @@
 import { motion, Variants } from 'framer-motion';
-import { PropsWithChildren, useRef, useState } from 'react';
+import { PropsWithChildren, useCallback, useRef, useState } from 'react';
 import { useEventListener, useOnClickOutside, useTimeout } from 'usehooks-ts';
 
 import { drawerContentStyle } from './style.css';
@@ -9,6 +9,7 @@ import type {
   PropsWithClassNameAndChildren,
 } from '@marbleTypes/generics';
 import useDrawerContext from './contexts/useDrawerContext';
+import useAnimationState from './hooks/useAnimationState';
 
 type ToggleProps = PropsWithClassNameAndChildren<{
   as?: keyof JSX.IntrinsicElements;
@@ -55,32 +56,20 @@ const Drawer = ({ autoOpenDelay, children }: DrawerProps) => {
 
 const DrawerChildren = ({
   children,
-  autoOpenDelay,
+  autoOpenDelay = 0,
 }: PropsWithChildren<{
   autoOpenDelay?: number;
 }>) => {
-  const ref = useRef(null);
-  const [canBeClosed, setCanBeClosed] = useState(false);
+  const { ref, isRunning } = useAnimationState<HTMLDivElement>();
   const { closeDrawer, openDrawer } = useDrawerContext();
 
   useOnClickOutside(ref, () => {
-    if (!canBeClosed) return;
+    if (isRunning) return;
     closeDrawer();
   });
 
-  const handleCanBeClosed = () => {
-    setCanBeClosed(true);
-  };
-
-  const handleCanNotBeClosed = () => {
-    setCanBeClosed(false);
-  };
-
-  const delay = autoOpenDelay ? autoOpenDelay * 1000 : null;
+  const delay = autoOpenDelay * 1000;
   useTimeout(openDrawer, delay);
-
-  useEventListener('animationend', handleCanBeClosed, ref);
-  useEventListener('animationstart', handleCanNotBeClosed, ref);
 
   return <div ref={ref}>{children}</div>;
 };

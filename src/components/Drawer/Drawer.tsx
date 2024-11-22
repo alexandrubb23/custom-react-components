@@ -72,10 +72,15 @@ const DrawerChildren = ({
     setCanBeClosed(true);
   };
 
+  const handleCanNotBeClosed = () => {
+    setCanBeClosed(false);
+  };
+
   const delay = autoOpenDelay ? autoOpenDelay * 1000 : null;
   useTimeout(openDrawer, delay);
 
   useEventListener('animationend', handleCanBeClosed, ref);
+  useEventListener('animationstart', handleCanNotBeClosed, ref);
 
   return <div ref={ref}>{children}</div>;
 };

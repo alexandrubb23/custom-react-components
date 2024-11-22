@@ -22,7 +22,7 @@ const ChipValue = () => {
     <Drawer.Toggle className={chipValueSelectorToggle}>
       <AnimateBetOnTap>
         <div className={chipValueSelectorContainerStyle}>
-          <div className={chipValueSelectorTextStyle}>BET</div>
+          {!isOpen && <div className={chipValueSelectorTextStyle}>BET</div>}
           <div className={chipValueSelectorStyle}>
             {chipWithCurrency(chipValue)}
           </div>

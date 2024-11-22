@@ -16,7 +16,7 @@ const ChipAmountSelector = () => (
       variants={parentVariant()}
     >
       <motion.h2 className={chipsTitleStyle} variants={childrenVariant}>
-        Select Amount
+        BET
       </motion.h2>
       <ChipsList />
     </motion.div>

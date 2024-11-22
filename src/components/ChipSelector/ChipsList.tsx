@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
 
+import { childrenVariant } from '@components/Drawer/Drawer';
+import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
 import { chipWithCurrency } from './ChipValueSelector/ChipValueSelector';
 import useChipContext from './contexts/useChipContext';
 import useChips from './hooks/useChips';
-import { chipsListItemStyle, chipsListStyle } from './style.css';
-import { childrenVariant } from '@components/Drawer/Drawer';
-import useDrawerContext from '@components/Drawer/contexts/useDrawerContext';
+import {
+  chipsListGridContainerStyle,
+  chipsListGridItemStyle,
+} from './style.css';
 
 const ChipsList = () => {
   const { chips } = useChips();
@@ -18,18 +21,18 @@ const ChipsList = () => {
   };
 
   return (
-    <ul className={chipsListStyle}>
+    <div className={chipsListGridContainerStyle}>
       {chips.map(chip => (
-        <motion.li
-          className={chipsListItemStyle}
+        <motion.div
           key={chip}
           onClick={handleChipSelect(chip)}
           variants={childrenVariant}
+          className={chipsListGridItemStyle}
         >
           {chipWithCurrency(chip)}
-        </motion.li>
+        </motion.div>
       ))}
-    </ul>
+    </div>
   );
 };
 

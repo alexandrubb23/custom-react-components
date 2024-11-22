@@ -1,4 +1,20 @@
-import { createVar, globalStyle, keyframes, style } from '@vanilla-extract/css';
+import {
+  ComplexStyleRule,
+  createVar,
+  keyframes,
+  style,
+} from '@vanilla-extract/css';
+
+const itemDividerStyle: ComplexStyleRule = {
+  background: 'rgba(255, 255, 255, 0.2)',
+  bottom: -6,
+  content: '',
+  gridColumn: 1 / -1,
+  height: 1,
+  left: 0,
+  margin: '0 auto',
+  position: 'absolute',
+};
 
 export const squeeze = keyframes({
   '0%': {
@@ -103,50 +119,45 @@ export const chipsTitleStyle = style({
   margin: 0,
 });
 
-export const chipsListStyle = style({
+export const chipsListGridContainerStyle = style({
   display: 'grid',
+  gridTemplateColumns: 'repeat(2, 1fr)',
   gap: 5,
-  gridTemplateColumns: '1fr 1fr',
-  gridTemplateRows: 'auto repeat(3, 1fr)',
-  listStyleType: 'none',
-  margin: 0,
+  textAlign: 'center',
   padding: 5,
 });
 
-export const chipsListItemStyle = style({
-  backgroundColor: 'beige',
+export const chipsListGridItemStyle = style({
+  backgroundColor: '#FFF5E7',
   borderRadius: 20,
+  boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.3)',
   cursor: 'pointer',
   fontSize: '0.938rem',
   lineHeight: 0.91,
   margin: '3px 0',
   padding: '8px 0',
-  width: '100%',
-  boxShadow: '0px 4px 12px 0px rgba(0, 0, 0, 0.3)',
+  position: 'relative',
   textShadow:
     '0 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 1px rgba(136, 136, 136, 0.2)',
-});
-
-globalStyle(`ul li:nth-child(1)`, {
-  gridColumn: '1 / -1',
-});
-
-globalStyle(`ul li:nth-child(1n)::after`, {
-  background: '#958B7D',
-  content: '',
-  display: 'block',
-  gridColumn: 1 / -1,
-  height: 1,
-  left: 0,
-  margin: '13px 7px 0',
-  position: 'absolute',
-  width: 'calc(100% - 13px)',
-});
-
-globalStyle(`ul li:nth-last-child(2)::after`, {
-  display: 'none',
-});
-
-globalStyle(`ul li:last-child::after`, {
-  display: 'none',
+  width: '100%',
+  selectors: {
+    '&::after': {
+      ...itemDividerStyle,
+      width: '100%',
+    },
+    '&:nth-child(n + 2):nth-child(odd):after': {
+      ...itemDividerStyle,
+      left: -5,
+      width: 72,
+    },
+    '&:nth-child(n + 2):last-child:after': {
+      display: 'none',
+    },
+    '&:nth-last-child(2):after': {
+      display: 'none',
+    },
+    [`${chipsListGridContainerStyle} &:first-child`]: {
+      gridColumn: 'span 2',
+    },
+  },
 });
